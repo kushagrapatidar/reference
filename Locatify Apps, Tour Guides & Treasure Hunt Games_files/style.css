@@ -1,0 +1,426 @@
+/*
+
+Theme Name:   Avada Child
+Theme URI:    https://theme-fusion.com
+Description:  Child theme for Avada theme
+Author:       ThemeFusion
+Author URI:   https://theme-fusion.com
+Template:     Avada
+Version:      1.0.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+Text Domain:  Avada
+
+*/
+
+a:hover,
+.page-id-21453 .post-content .panel-body a  {
+	color: #FB5877 !important;
+}
+
+article .post-content a,
+.page-id-21453 .post-content .panel-body a {
+	text-decoration: underline;
+}
+
+.single-avada_portfolio #main {
+	padding-top: 0 !important;
+}
+
+#logos-carousel .fusion-carousel-item .fusion-image-wrapper {
+	transition: filter 0.3s ease;
+}
+
+#logos-carousel .fusion-carousel-item:nth-child(1) .fusion-image-wrapper {
+	filter: saturate(0%) opacity(52%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(2) .fusion-image-wrapper {
+	filter: saturate(0%) contrast(104%) opacity(83%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(3) .fusion-image-wrapper {
+	filter: saturate(0%) contrast(3%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(4) .fusion-image-wrapper {
+	filter: saturate(0%) brightness(0%) contrast(0%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(5) .fusion-image-wrapper {
+	filter: saturate(0%) opacity(70%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(6) .fusion-image-wrapper {
+	filter: saturate(0%);
+}
+
+
+#logos-carousel .fusion-carousel-item:nth-child(1) .fusion-image-wrapper.hovering {
+	filter: saturate(100%) opacity(100%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(2) .fusion-image-wrapper.hovering {
+	filter: saturate(100%) contrast(100%) opacity(100%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(3) .fusion-image-wrapper.hovering {
+	filter: saturate(100%) contrast(100%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(4) .fusion-image-wrapper.hovering {
+	filter: saturate(100%) brightness(100%) contrast(100%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(5) .fusion-image-wrapper.hovering {
+	filter: saturate(100%) opacity(100%);
+}
+#logos-carousel .fusion-carousel-item:nth-child(6) .fusion-image-wrapper.hovering {
+	filter: saturate(100%);
+}
+
+.home .fusion-main-menu>ul>li>a,
+.page-id-21202 .fusion-main-menu>ul>li>a,
+.page-id-21313 .fusion-main-menu>ul>li>a{
+	color: #354362;
+}
+
+.login-signup-cover .fusion-column-wrapper .fusion-column-content-centered {
+	align-items: flex-end;
+	padding-bottom: 70px;
+}
+
+.login-signup-cover .fusion-column-wrapper .fusion-column-content-centered h1,
+.new-form-content h1 {
+	font-size: 32px !important;
+}
+
+.login-signup-cover .fusion-column-wrapper .fusion-column-content-centered h2 {
+	font-size: 19px !important;
+	font-weight: normal !important;
+}
+
+.new-form-content {
+	font-weight: bold;
+}
+
+.new-form-content #new-form-signup table,
+.new-form-content #new-form-login table {
+	width: 100%;
+}
+
+.new-form-content .warning-ie {
+	font-size: 16px;
+	line-height: 1.1;
+}
+
+.new-form-content .social-signup {
+	margin-top: 15px;
+	text-align: center;
+}
+
+.new-form-content .social-signup  i {
+	cursor: pointer;
+}
+
+.new-form-content #new-form-signup table input:not([type='checkbox']),
+.new-form-content #new-form-login table input:not([type='checkbox']) {
+	-webkit-border-radius: 35px;
+	border-radius: 35px;
+	padding-left: 25px;
+	padding-right: 25px;
+	height: 50px;
+	color: #354362;
+	border-color: #354362;
+	font-weight: bold;
+}
+
+.new-form-content #new-form-signup table tr td,
+.new-form-content #new-form-login table tr td {
+	padding-bottom: 15px;
+}
+
+.new-form-content #new-form-signup .error,
+.new-form-content #new-form-login .error {
+	font-size: 12px;
+	color: rgb(204, 0, 0);
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content,
+.new-form-content #new-form-login table tr td.term-agreement-content {
+	width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div,
+.new-form-content #new-form-login table tr td.term-agreement-content > div {
+	width: 50%;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.tos,
+.new-form-content #new-form-login table tr td.term-agreement-content > div.tos {
+	display: flex;
+    align-items: center;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.tos p,
+.new-form-content #new-form-login table tr td.term-agreement-content > div.tos p {
+	margin-bottom: 0;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.tos > div,
+.new-form-content #new-form-login table tr td.term-agreement-content > div.tos > div {
+	font-size: 12px;
+	line-height: 1.1;
+	padding: 5px;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.tos > div a,
+.new-form-content #new-form-login table tr td.term-agreement-content > div.tos > div a  {
+	text-decoration: underline;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.signup-custom-button button#new-submit-signup,
+.new-form-content #new-form-login table tr td button#new-submit-login {
+	background-color:  #FB5877;
+	width: 100%;
+	cursor: pointer;
+}
+
+.new-form-content #new-form-signup table tr td.term-agreement-content > div.signup-custom-button button#new-submit-signup:hover,
+.new-form-content #new-form-login table tr td button#new-submit-login:hover {
+	background-color: #354362;
+}
+
+.new-form-content #new-form-login .extra-information-login {
+	font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1.1;
+}
+
+.new-form-content #new-form-login .extra-information-login a {
+	color: #FB5877;
+}
+
+.new-form-content #new-form-login .extra-information-login #recover-password-button {
+	padding: 0;
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    text-transform: none;
+    font-size: 13px;
+    font-family: 'Open Sans';
+    text-align: right;
+}
+
+.new-form-content #new-form-login .extra-information-login #recover-password-button span {
+	color: #354362;
+	letter-spacing: normal;
+}
+
+.new-form-content #new-form-signup ::-webkit-input-placeholder,
+.new-form-content #new-form-sigloginnup ::-webkit-input-placeholder { /* Edge */
+  color: #354362;
+}
+
+.new-form-content #new-form-signup :-ms-input-placeholder,
+.new-form-content #new-form-login :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #354362;
+}
+
+.new-form-content #new-form-signup ::placeholder,
+.new-form-content #new-form-login ::placeholder {
+  color: #354362;
+}
+
+.single #content,
+.archive #content,
+.category #content,
+.search #content,
+.search-results #content{
+	padding-top: 45px;
+}
+
+.signup-success {
+	font-weight: normal;
+}
+
+.related-posts .fusion-carousel .fusion-carousel-title {
+	font-size: 16px;
+}
+
+.single-avada_portfolio .related-posts {
+	max-width: 1260px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+}
+.single-avada_portfolio .related-posts .fusion-carousel {
+	overflow: visible;
+}
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-prev {
+	margin-left: -35px !important;
+}
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-next {
+	right: -50px !important;
+	left: auto !important;
+}
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-prev,
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-next {
+	background: transparent;
+}
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-prev:before,
+.single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-next:before {
+	color: #364463;
+	font-size: 45px;
+    font-weight: bold;
+}
+.single-avada_portfolio .related-posts > h1 {
+	font-size: 28px !important;
+}
+
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper {
+	background: #364463;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}
+
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-image-wrapper {
+	-webkit-border-top-right-radius: 15px;
+	border-top-right-radius: : 15px;
+	-webkit-border-top-left-radius: 15px;
+	border-top-left-radius: : 15px;
+}
+.related-posts .fusion-carousel-item-wrapper .fusion-image-wrapper .fusion-rollover {
+	background: transparent;
+}
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-title {
+	margin-top: 20px;
+	margin-bottom: 0;
+	padding: 0 15px;
+}
+
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-title a {
+	color: white;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+}
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-subheader-content {
+	color: white;
+    font-size: 14px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-meta {
+	display: none;
+}
+
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-more {
+	margin-bottom: 30px;
+}
+.single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-more a {
+	padding: 9px 20px;
+    line-height: 14px;
+    font-size: 14px;
+    text-transform: none;
+}
+.page-id-21202 .tooltip.top {
+	margin-top: -15px;
+}
+.tagcloud a span.tag-link-count {
+	margin-left: 5px;
+}
+.ptsTableFrontedShell .ptsBlockContent span, .ptsTableFrontedShell .ptsBlockContent p {
+	white-space: nowrap;
+}
+#categories-3 h4.widget-title {
+	margin-top: 0;
+}
+#categories-3 select {
+	padding: 0 15px;
+}
+body:not(.page-id-21202):not(.page-id-21313) .grecaptcha-badge {
+	display: none !important;
+}
+
+/*@media (max-width: 1400px) {
+	.page-id-21313 .first-row-less-padding,
+	.page-id-21202 .first-row-less-padding{
+		margin-top: 70px !important;
+	}
+}*/
+@media (min-width: 1235px) {
+	.upgrade-pricing-tables .modal-dialog {
+			width: 1200px;
+	}
+}
+@media (min-width: 1235px) {
+	.page-id-21202 header .fusion-header,
+	.page-id-21313 header .fusion-header {
+		top: 0 !important;
+		height: 65px !important;
+	}
+	.page-id-21202 header .fusion-logo,
+	.page-id-21313 header .fusion-logo {
+		margin-top: 5px !important;
+		margin-bottom: 5px !important;
+	}
+	.page-id-21202 header .fusion-main-menu>ul>li>a,
+	.page-id-21313 header .fusion-main-menu>ul>li>a {
+		height: 65px !important;
+		padding-left: calc((45px)/ 2) !important;
+    	padding-right: calc((45px)/ 2) !important;
+	}
+	.page-id-21202 header .fusion-standard-logo,
+	.page-id-21313 header .fusion-standard-logo {
+		display: none !important;
+	}
+	.page-id-21202 header .fusion-sticky-logo,
+	.page-id-21313 header .fusion-sticky-logo {
+		display: block !important;
+	}
+	.page-id-21202 .fusion-fullwidth,
+	.page-id-21313 .fusion-fullwidth {
+		margin-top: 65px !important;
+	}
+}
+
+@media (max-width: 1235px) {
+	#new-signup {
+	  	margin-top: 0 !important;
+	}
+}
+
+@media (max-width: 800px) {
+  #new-signup .fusion-column-wrapper {
+  	padding: 30px 40px !important;
+  }
+  .login-signup-cover .fusion-column-wrapper .fusion-column-content-centered {
+  	padding-bottom: 0 !important;
+    padding-top: 185px;
+  }
+  .single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-title a {
+  	font-size: 16px;
+  }
+  .single-avada_portfolio .related-posts .fusion-carousel-item-wrapper .fusion-carousel-subheader-content {
+  	font-size: 13px;
+  }
+  .single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-next {
+  	right: -30px !important;
+  }
+  .single-avada_portfolio .related-posts .fusion-carousel .fusion-carousel-nav .fusion-nav-prev {
+    margin-left: -15px !important;
+   }
+   #rev_slider_1_1 rs-sbg {
+   	    background-image: none !important;
+    	background-color: white !important;
+   }
+   #logos-carousel .fusion-carousel-item .fusion-image-wrapper {
+   	filter: none !important;
+   }
+}
+
+@media (max-width: 480px) {
+  #carousel-graphic-layer {
+  	z-index: 8 !important;
+  }
+  .fusion-logo {
+    margin-bottom: 20px !important;
+  }
+}

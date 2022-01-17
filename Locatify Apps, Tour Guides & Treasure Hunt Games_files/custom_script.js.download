@@ -1,0 +1,360 @@
+// Google Sign up
+
+var googleUser = {};
+window.onLoadCallback = function(){
+	gapi.load('auth2', function (e) {
+		// Retrieve the singleton for the GoogleAuth library and set up the client.
+		auth2 = gapi.auth2.init({
+			client_id: '221728693082-94r361v9snuhj2ri382ibkbaoc23gsnm.apps.googleusercontent.com',
+			cookiepolicy: 'single_host_origin',
+			// Request scopes in addition to 'profile' and 'email'
+			//scope: 'additional_scope'
+		});
+		attachLoginSignin(document.getElementById('google-signup'));
+	});
+};
+
+function attachLoginSignin(element) {
+	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+	auth2.attachClickHandler(element, {},
+		function (googleUser) {
+			if (isChrome) {
+				window.location = "https://cms.locatify.com/apis/login_by_google?access_token=" + googleUser.getAuthResponse().id_token;
+			} else {
+				jQuery.ajax({
+					url: "https://cms.locatify.com/apis/login_by_google",
+					data: {
+						access_token: googleUser.getAuthResponse().id_token
+					},
+					type: "POST",
+					crossDomain: true,
+					xhrFields: {
+						withCredentials: true
+					},
+					success: function (rsp) {
+						window.location = 'https://cms.locatify.com/index.html#/home';
+					},
+					error: function () {
+						alert('An error has occurred');
+					}
+				});
+			}
+
+		});
+}
+
+// menu custum logo
+jQuery(function(){
+
+	if (jQuery('body').hasClass('page-id-21202') || jQuery('body').hasClass('page-id-21313')) {
+	    jQuery('header').addClass('fusion-is-sticky');
+	    jQuery('.fusion-header').addClass('fusion-sticky-shadow');
+	}
+
+	if (getUrlParameter('openRecover')) {
+		jQuery('#recover-password-button').trigger('click');
+	}
+
+	/*jQuery(window).scroll(function (event) {
+		 var scroll = jQuery(window).scrollTop();
+		if (jQuery('body').hasClass('page-id-21202') || jQuery('body').hasClass('page-id-21313') && jQuery(window).width() > 1235) {
+			if (scroll < 50) {
+	    		jQuery(window).scrollTop(50);
+	    	}
+		}
+	});*/
+
+	//startLoginApp();
+
+	if (jQuery('.home').hasClass('page-id-21202') || jQuery('.home').hasClass('page-id-21313')) {
+		grecaptcha.ready(function() {
+	        // do request for recaptcha token
+	        // response is promise with passed token
+	        grecaptcha.execute('6Lfl6gkaAAAAAI5nk4yeTI35WBhhmsPtd0WCcrq-', {action: 'validate_captcha'}).then(function(token) {
+	            // add token to form
+	            console.log(token);
+	        });
+	    });
+	}
+
+
+	jQuery('.home, .page-id-21202, .page-id-21313').find('.fusion-logo-link img.fusion-standard-logo')
+		.attr('src', 'https://locatify.com/wp-content/uploads/2020/11/logo_azul.png')
+		.attr('srcset', 'https://locatify.com/wp-content/uploads/2020/11/logo_azul.png');
+
+	// standard signup
+	jQuery('.new-submit-signup').click(function(e){
+
+		$form = jQuery(this).closest('#new-form-signup');
+
+		var voucher_code = getUrlParameter('voucher_code');
+		var email = getUrlParameter('email');
+		var errors = 0;
+
+		if (voucher_code) {
+			$form.find('input[name="voucher_code"]').val(voucher_code);
+		}
+		if (email) {
+			$form.find('input[name="email"]').val(email);
+		}
+
+		$form.find('tr').each(function(i){
+			var input = jQuery(this).find('input');
+			if (input.attr('type') === 'text' || input.attr('type') === 'password') {
+				if(input.val() === '' && input.prop('required')) {
+					errors++;
+					input.parent().find('.error').remove();
+					input.css({
+						'border-color' : '#c00'
+					});
+					input.after('<div class="error">This field is required.</div>');
+				}
+				else {
+					input.parent().find('.error').remove();
+					input.css({
+						'border-color' : 'inherit'
+					});
+				}
+				if ((input.attr('type') === 'password') && input.val().length < 6) {
+					errors++;
+					input.parent().find('.error').remove();
+					input.css({
+						'border-color' : '#c00'
+					});
+					input.after('<div class="error">The password must contain at least 6 characters.</div>');
+				}
+			}
+			if (input.attr('type') === 'checkbox' && input.prop('checked') === false) {
+				input.closest('.term-agreement-content').css({
+					'color' : '#c00'
+				});
+				errors++;
+				input.focus();
+			}
+		});
+
+		if ($form.find('input[name="password"]').val() !== $form.find('input[name="confirm-password"]').val()) {
+			errors++;
+			$form.find('input[name="password"], input[name="confirm-password"]').parent().find('.error').remove();
+			$form.find('input[name="password"], input[name="confirm-password"]').css({
+				'border-color' : '#c00'
+			});
+			$form.find('input[name="confirm-password"]').after('<div class="error">Passwords do not match.</div>');
+		}
+
+		if (errors === 0) {
+			jQuery.ajax({
+				url: 'https://cms.locatify.com/creator_server/signup/',
+				data: $form.serialize(),
+				type: 'post',
+				dataType: 'json',
+				success: function(data) {
+					jQuery('.error').remove();
+					switch (parseInt(data.status)) {
+						case 0:
+							jQuery('#new-signup').addClass('signup-submitted');
+							$form.closest('.fusion-column-wrapper').find('h1').html('Your registration has been submitted ✓');
+							jQuery('.social-signup-content, #new-form-signup').fadeOut();
+							$form.before('<div class="signup-success"><p>Please click the activation link in your email to get started. If you didn\'t received a confirmation email, please check your spam folder.</p></div>');
+							//$form.fadeOut();
+							break;
+						case 1:
+							$form.find('input[name="username"]').after('<div class="error">Invalid username</div>');
+							$form.find('input[name="username"]').css({
+								'border-color' : '#c00'
+							});
+							break;
+						case 2:
+							$form.find('input[name="password"]').after('<div class="error">Invalid password</div>');
+							$form.find('input[name="password"]').css({
+								'border-color' : '#c00'
+							});
+							break;
+						case 3:
+							$form.find('input[name="email"]').after('<div class="error">Invalid email</div>');
+							$form.find('input[name="email"]').css({
+								'border-color' : '#c00'
+							});
+							break;
+						case 4:
+							$form.find('input[name="username"]').css({
+								'border-color' : '#c00'
+							});
+							$form.prepend('<div class="error">This user already exists</div>');
+							break;
+						case 5:
+							$form.prepend('<div class="error">Maximum account users reached. <a href="https://locatify.com/contact/" target="_blank">Contact us</a> to add more users to your account.</div>');
+							break;
+						default:
+							$form.prepend('<div class="error">An unknown error has occurred.</div>');
+							break;
+					}
+
+				},
+				error : function(err) {
+					console.log(err);
+					jQuery('.error').remove();
+					if (err.responseJSON && err.responseJSON.status === 100) {
+						$text = 'Invalid voucher code';
+						$class = 'error';
+						jQuery('.messageBox.error').remove();
+						$form.prepend('<div class="error"><b>'+$text+'<b/></div>');
+					}
+					else {
+						$form.prepend('<div class="error">An unknown error has occurred.</div>');
+					}
+				}
+			});
+		}
+
+	});
+
+	var wrong = 'Incorrect username or password. The password must be alphanumeric and at 8 characters long.';
+	var inactive = 'Account isn’t activated yet. Please check for activation email in your Inbox or Spam folder.';
+    var lockout = 'Login has been disabled for 15 minutes for security reasons because of too many failed login attempts.';
+
+	if ((getUrlParameter('status') === '1') && (getUrlParameter('form') === 'login')) {
+		//jQuery('.post-content').prepend('<div class="messageBox error">' + wrong + '</div>');
+		jQuery('#new-form-login').prepend('<div class="error">' + wrong + '</div>');
+		jQuery('#new-form-login').find('input').css({
+			'border-color': 'rgb(204, 0, 0)'
+		});
+	}
+	if (getUrlParameter('status') === '2') {
+		//jQuery('.post-content').prepend('<div class="messageBox error">'+ inactive +'</div>');
+		//jQuery('.post-content').find('.messageBox').html(inactive);
+		jQuery('#new-form-login').prepend('<div class="error">' + inactive + '</div>');
+	}
+	if (getUrlParameter('status') === '4') {
+		//jQuery('.post-content').find('.messageBox').html(lockout);
+		jQuery('#new-form-login').prepend('<div class="error">' + lockout + '</div>');
+	}
+	if (getUrlParameter('username')) {
+		var username = getUrlParameter('username');
+		jQuery('#form-login').find('.login-username').val(username);
+	}
+
+	// facebook signup
+
+	window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '1654696868122601', // Set YOUR APP ID
+	      status     : true, // check login status
+	      cookie     : true, // enable cookies to allow the server to access the session
+	      xfbml      : true  // parse XFBML
+	    });
+	    FB.Event.subscribe('auth.authResponseChange', function(response) {
+		    if (response.status === 'connected') {
+		        console.log('Connected to Facebook');
+		    }
+		    else if (response.status === 'not_authorized')  {
+		        console.log('Failed to Connect');
+		        //FAILED
+		    } else {
+		 		console.log('Logged Out');
+		        //UNKNOWN ERROR
+		    }
+	    });
+    };
+
+    // Load the SDK Asynchronously
+	(function(d){
+	 var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+	 js = d.createElement('script'); js.id = id; js.async = true;
+	 js.src = "https://connect.facebook.net/en_US/all.js";
+	 d.getElementsByTagName('head')[0].appendChild(js);
+	}(document));
+
+ 	jQuery( '#facebook-signup' ).click(function() {
+
+ 		if (!jQuery(this).attr('disabled')) {
+ 			FB.login(function(response) {
+
+	           if (response.authResponse)
+	           {
+	                getUserInfo(response.authResponse);
+	            } else
+	            {
+	             alert('User cancelled login or did not fully authorize.');
+	            }
+	         }, {scope: 'email'});
+
+ 		}
+
+ 	});
+
+ 	// set recover password page
+	var key = getUrlParameter('key');
+	jQuery('#password-recovery iframe.recover-iframe').attr('src', 'https://cms.locatify.com/password_reset/reset/' + key + '/');
+
+});
+
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function getUserInfo(authResponse) {
+ 	var data = {access_token : authResponse.accessToken};
+ 	if(jQuery('#voucher-code').val()) {
+ 		if(jQuery('#voucher-code').val() !== 'MYGIFT') {
+ 			var data = {access_token : authResponse.accessToken, voucher_code : jQuery('#voucher-code').val()};
+ 			FB.api('/me?fields=id,name,email,first_name,last_name', function(response) {
+ 				serverCall(data, 'facebook');
+ 			});
+ 		}
+ 		else {
+ 			alert('As an educator using the voucher code "MYGIFT", please sign up below by creating a username and using your educators email address');
+ 		}
+ 	}
+ 	else {
+ 		FB.api('/me?fields=id,name,email,first_name,last_name', function(response) {
+ 			serverCall(data, 'facebook');
+ 		});
+ 	}
+}
+
+function serverCall(data, platform) {
+	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+	var url = data.voucher_code ? "https://cms.locatify.com/apis/login_by_" + platform + '?access_token=' + data.access_token + '&voucher_code=' + data.voucher_code : "https://cms.locatify.com/apis/login_by_" + platform + '?access_token=' + data.access_token;
+
+    if (isChrome) {
+    	window.location = url;
+    }
+    else {
+    	jQuery.ajax({
+		  url: url,
+		  data: data,
+		  type: "POST",
+		  crossDomain: true,
+		  dataType: 'json',
+		  xhrFields: {
+			withCredentials: true
+		  },
+		  success : function(rsp){
+		  	window.location = 'https://cms.locatify.com/index.html#/home';
+		  },
+		  error : function(err){
+		  	if(jQuery('#voucher-code').val()) {
+		  		alert('Wrong voucher code');
+		  	}
+		  	else {
+		  		alert('An error has occurred');
+		  	}
+		  }
+		});
+    }
+}
